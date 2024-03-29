@@ -12,7 +12,9 @@ class ProfileInline(admin.StackedInline):
 #     fields = ["username"]
 #     inlines = [ProfileInline]
 
-admin.site.unregister(User)
-admin.site.register(User)
+
+
+# admin.site.unregister(User)
+# admin.site.register(User)
 admin.site.unregister(Group)
-# Remove: admin.site.register(Profile)
+# # Remove: admin.site.register(Profile)

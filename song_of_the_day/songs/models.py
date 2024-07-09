@@ -52,6 +52,11 @@ class Tag(models.Model):
 		verbose_name_plural = "Теги"
 		ordering = ["title"]
 
+def populate_slug(instance):
+    return instance.title
+def custom_slugify(value):
+    return value.replace(' ', '-')
+
 class Song_of_the_Day(models.Model):
 	title = models.CharField(verbose_name = "Назва пісні", max_length=150)
 	album = models.CharField(verbose_name = "Назва альбому", max_length=150)
@@ -69,9 +74,7 @@ class Song_of_the_Day(models.Model):
 
 	profile = models.OneToOneField(Profile, verbose_name="Профіль", on_delete = models.CASCADE, primary_key=True, blank=True)
 	tags = models.ManyToManyField(Tag, blank=True, related_name="Дні_пісень", verbose_name="Теги")
-	slug = AutoSlugField(populate_from = lambda instance: instance.title, 
-		unique_with = ['day',], 
-		slugify = lambda value: value.replace(' ','-'))
+	slug = AutoSlugField(populate_from = populate_slug, unique_with = ['day',], slugify = custom_slugify)
 
 	def __str__(self):
 		return self.title

@@ -146,8 +146,11 @@
 
 			{% if user.is_authenticated %}
 				{% if user.is_superuser %}
-					<p>Hi, admin!</p>
+					<p>Hi, admin {{user.username}}!</p>
+				{% else %}
+					<p>Hello there, {{user.username}}!</p>
 				{%endif %}
+
 				<div class="user_buttons">
 					<a href="{% url 'logout_user' %}">Logout</a>
 				</div>
